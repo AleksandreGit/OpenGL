@@ -15,10 +15,39 @@ void processInput(GLFWwindow* window) {
     }
 }
 
+// Dimensions of the windows
+const int W_WIDTH(800), W_HEIGHT(600);
+
+// Datas of a triangle
+float vertices[] = {
+    -0.5f, -0.5f, 0.0f,
+    0.5f, -0.5f, 0.0f,
+    0.0f, 0.5f, 0.0f
+};
+
+
+// Code of the shaders (temporary)
+const char* vertexShaderSource = "#version 330 core\n"
+"layout (location = 0) in vec3 aPos;\n"
+"void main()\n"
+"{\n"
+"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+"}\0";
+
+const char* fragmentShaderSource = "#version 330 core\n"
+"out vec4 FragColor;\n"
+"void main()\n"
+"{\n"
+"   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+"}\n\0";
+
 int main()
 {
-    // Dimensions of the windows
-    const int W_WIDTH(800), W_HEIGHT(600);
+    /*
+       ================
+        INITIALIZATION 
+       ================
+    */
 
     // Initialisation of GLFW
     glfwInit();
@@ -51,21 +80,110 @@ int main()
     // We tell GLFW to call the callback function frameBufferSizeCallback when the window is resized
     glfwSetFramebufferSizeCallback(window, frameBufferSizeCallback);
 
+    // VERTEX SHADER
+    // Create the vertex shader
+    unsigned int vertexShader;
+    vertexShader = glCreateShader(GL_VERTEX_SHADER);
+
+    // We attach the shader source code to the shader and compile the shader
+    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+    glCompileShader(vertexShader);
+
+    // check for shader compile errors
+    int success;
+    char infoLog[512];
+    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+    if (!success)
+    {
+        glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
+        std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+    }
+
+    //FRAGMENT SHADER
+    unsigned int fragmentShader;
+    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+
+    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+    glCompileShader(fragmentShader);
+    // check for shader compile errors
+    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+    if (!success)
+    {
+        glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
+        std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
+    }
+
+    //SHADER PROGRAMM
+    // We create our shader programm
+    unsigned int shaderProgram;
+    shaderProgram = glCreateProgram();
+
+    // We attach our shaders to the program object and we link them tohgether
+    glAttachShader(shaderProgram, vertexShader);
+    glAttachShader(shaderProgram, fragmentShader);
+    glLinkProgram(shaderProgram);
+
+    // We can now delete the shader objects
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
+
+    // VAO / VBO
+    unsigned int VAO, VBO;
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+
+    // Bind VAO
+    glBindVertexArray(VAO);
+    // Copy our vertices array in a buffer for OpenGL to use
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+   
+    // Set our vertex attributes pointers
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+
+    // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
+    // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
+    glBindVertexArray(0);
+
+    /*
+       ================
+            LOOP
+       ================
+    */
+
     // We iterate while we don't say explicitly we want to close the window
     while (!glfwWindowShouldClose(window)) {
         // clear the screen with a color
-        glClearColor(0.5f, 0.4f, 0.1f, 1.0f); // state-setting function
+        glClearColor(0.0f, 0.1f, 0.6f, 1.0f); // state-setting function
         glClear(GL_COLOR_BUFFER_BIT); // state-using function
 
         // input
         processInput(window);
 
-        //rendering commands here
+        glUseProgram(shaderProgram);
+        glBindVertexArray(VAO);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
 
         // check and call events and swap the buffers
         glfwSwapBuffers(window); 
         glfwPollEvents(); 
     }
+
+    /*
+       ================
+            QUIT
+       ================
+    */
+
+    // optional: de-allocate all resources once they've outlived their purpose:
+    // ------------------------------------------------------------------------
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteProgram(shaderProgram);
 
     glfwTerminate(); // clean/delete all of GLFW's ressources allocated
     return 0;
