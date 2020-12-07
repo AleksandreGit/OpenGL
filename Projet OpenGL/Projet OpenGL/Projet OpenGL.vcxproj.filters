@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Fichiers sources\Exercices Triangle">
+      <UniqueIdentifier>{22d58d6a-2479-45ad-9da1-77156747a49b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -20,6 +23,9 @@
     </ClCompile>
     <ClCompile Include="lib\glad.c">
       <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Exercice1.cpp">
+      <Filter>Fichiers sources\Exercices Triangle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
+/*
 // Callback function called to resize the window
 void frameBufferSizeCallback(GLFWwindow* window, const int width, const int height) {
     glViewport(0, 0, width, height);
@@ -55,13 +56,13 @@ const char* fragmentShaderSource = "#version 330 core\n"
 "}\n\0";
 
 int main()
-{
+{*/
     /*
        ================
         INITIALIZATION 
        ================
     */
-
+/*
     // Initialisation of GLFW
     glfwInit();
     // Adding OpenGL's version (3.3) --> ensure that we have the right version of OpenGL
@@ -168,13 +169,13 @@ int main()
     glBindVertexArray(0);
 
 
-
-    /*
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); ==> this line permits to draw without filling the drawings
+  */  /*
        ================
             LOOP
        ================
     */
-
+/*
     // We iterate while we don't say explicitly we want to close the window
     while (!glfwWindowShouldClose(window)) {
         // clear the screen with a color
@@ -193,13 +194,13 @@ int main()
         glfwSwapBuffers(window); 
         glfwPollEvents(); 
     }
-
+    */
     /*
        ================
             QUIT
        ================
     */
-
+/*
     // optional: de-allocate all resources once they've outlived their purpose:
     // ------------------------------------------------------------------------
     glDeleteVertexArrays(1, &VAO);
@@ -209,4 +210,4 @@ int main()
     glfwTerminate(); // clean/delete all of GLFW's ressources allocated
     return 0;
     
-}
+}*/
