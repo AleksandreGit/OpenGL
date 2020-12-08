@@ -1,8 +1,8 @@
-#include <glad/glad.h> // Glad need to be imported first because it imports the basics of OpenGL elements
+/*#include <glad/glad.h> // Glad need to be imported first because it imports the basics of OpenGL elements
 #include <GLFW/glfw3.h>
 #include <iostream>
 
-/*
+
 // Callback function called to resize the window
 void frameBufferSizeCallback(GLFWwindow* window, const int width, const int height) {
     glViewport(0, 0, width, height);

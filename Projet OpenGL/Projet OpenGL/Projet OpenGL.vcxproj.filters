@@ -30,6 +30,9 @@
     <ClCompile Include="Exercice2.cpp">
       <Filter>Fichiers sources\Exercices Triangle</Filter>
     </ClCompile>
+    <ClCompile Include="Exerice3.cpp">
+      <Filter>Fichiers sources\Exercices Triangle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="vertex.glsl" />

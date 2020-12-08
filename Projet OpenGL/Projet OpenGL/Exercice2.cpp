@@ -1,4 +1,4 @@
-#include <glad/glad.h> // Glad need to be imported first because it imports the basics of OpenGL elements
+/*#include <glad/glad.h> // Glad need to be imported first because it imports the basics of OpenGL elements
 #include <GLFW/glfw3.h>
 #include <iostream>
 
@@ -142,4 +142,4 @@ int main() {
 
 	return 0;
 
-}
+}*/
