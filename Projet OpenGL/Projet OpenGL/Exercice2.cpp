@@ -1,4 +1,3 @@
-/*
 #include <glad/glad.h> // Glad need to be imported first because it imports the basics of OpenGL elements
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -24,18 +23,22 @@ const char* fragmentShaderSource = "#version 330 core\n"
 "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
 "}\n\0";
 
-float twoTrianglesVertices[] = {
+float firstTVertices[] = {
 	// first triangle
 	-0.7f, 0.0f, 0.0f,
 	-0.7f, 0.7f, 0.0f,
 	0.0f, 0.7f, 0.0f,
 
+};
+
+float secondTVertices[] = {
 	// second triangle
 	0.0f, -0.7f, 0.0f,
 	0.7f, 0.0f, 0.0f,
 	0.7f, -0.7f, 0.0f,
-
 };
+
+
 
 int main() {
 	glfwInit();
@@ -94,20 +97,25 @@ int main() {
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 
-	// VBO
-	unsigned int VBO, VAO;
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
+	// VBOs & VAOs
+	unsigned int VBOs[2], VAOs[2];
 
-	glBindVertexArray(VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(twoTrianglesVertices), twoTrianglesVertices, GL_STATIC_DRAW);
+	glGenVertexArrays(2, VAOs);
+	glGenBuffers(2, VBOs);
+
+	glBindVertexArray(VAOs[0]);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOs[0]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(firstTVertices), firstTVertices, GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
+	glBindVertexArray(VAOs[1]);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOs[1]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(secondTVertices), secondTVertices, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
 
 
 	while (!glfwWindowShouldClose(window)) {
@@ -116,22 +124,22 @@ int main() {
 
 
 		glUseProgram(shaderProgram);
-		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glBindVertexArray(VAOs[0]);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glBindVertexArray(VAOs[1]);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 		glBindVertexArray(0);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
+	glDeleteVertexArrays(2, VAOs);
+	glDeleteBuffers(2, VBOs);
 	glDeleteProgram(shaderProgram);
-
 
 	glfwTerminate();
 
 	return 0;
 
 }
-*/

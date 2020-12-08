@@ -143,6 +143,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Exercice1.cpp" />
+    <ClCompile Include="Exercice2.cpp" />
     <ClCompile Include="lib\glad.c" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
