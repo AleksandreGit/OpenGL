@@ -30,12 +30,23 @@
     <ClCompile Include="Exercice2.cpp">
       <Filter>Fichiers sources\Exercices Triangle</Filter>
     </ClCompile>
-    <ClCompile Include="Exerice3.cpp">
+    <ClCompile Include="Exercice3.cpp">
       <Filter>Fichiers sources\Exercices Triangle</Filter>
+    </ClCompile>
+    <ClCompile Include="ColoredTriangle.cpp">
+      <Filter>Fichiers sources\Exercices Triangle</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="vertex.glsl" />
     <None Include="fragment.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Shader.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
