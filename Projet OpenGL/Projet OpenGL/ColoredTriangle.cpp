@@ -28,6 +28,8 @@ float vertices[] = {
      0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f
 };
 
+const float X_OFFSET = 30.0f;
+
 
 int main()
 {
@@ -61,6 +63,8 @@ int main()
     glfwSetFramebufferSizeCallback(window, frameBufferSizeCallback);
 
     Shader shader("./vertex.glsl", "./fragment.glsl");
+
+    shader.setFloat("offset", X_OFFSET);
 
     // VAO / VBO
     unsigned int VAO, VBO;
