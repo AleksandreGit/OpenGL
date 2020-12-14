@@ -1,3 +1,5 @@
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 #include <glad/glad.h> // Glad need to be imported first because it imports the basics of OpenGL elements
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -28,7 +30,7 @@ float vertices[] = {
      0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f
 };
 
-const float X_OFFSET = 30.0f;
+float X_OFFSET = 0.3f;
 
 
 int main()
@@ -63,8 +65,6 @@ int main()
     glfwSetFramebufferSizeCallback(window, frameBufferSizeCallback);
 
     Shader shader("./vertex.glsl", "./fragment.glsl");
-
-    shader.setFloat("offset", X_OFFSET);
 
     // VAO / VBO
     unsigned int VAO, VBO;
@@ -103,6 +103,7 @@ int main()
         // input
         processInput(window);
 
+        shader.setFloat("offset", X_OFFSET);
         shader.use();
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 3);
