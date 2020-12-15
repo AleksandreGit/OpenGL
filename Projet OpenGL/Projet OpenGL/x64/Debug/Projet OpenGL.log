@@ -1,17 +1,2 @@
 ﻿  ColoredTriangle.cpp
-glfw3.lib(context.obj) : warning LNK4099: PDB 'glfw.pdb' n'a pu être trouvé avec 'glfw3.lib(context.obj)' ou sur 'C:\Users\alexc\Desktop\Documents\Projets Perso\OpenGL\Projet OpenGL\x64\Debug\glfw.pdb' ; l'objet sera lié sans informations de débogage
-glfw3.lib(init.obj) : warning LNK4099: PDB 'glfw.pdb' n'a pu être trouvé avec 'glfw3.lib(init.obj)' ou sur 'C:\Users\alexc\Desktop\Documents\Projets Perso\OpenGL\Projet OpenGL\x64\Debug\glfw.pdb' ; l'objet sera lié sans informations de débogage
-glfw3.lib(input.obj) : warning LNK4099: PDB '' n'a pu être trouvé avec 'glfw3.lib(input.obj)' ou sur '' ; l'objet sera lié sans informations de débogage
-glfw3.lib(monitor.obj) : warning LNK4099: PDB 'glfw.pdb' n'a pu être trouvé avec 'glfw3.lib(monitor.obj)' ou sur 'C:\Users\alexc\Desktop\Documents\Projets Perso\OpenGL\Projet OpenGL\x64\Debug\glfw.pdb' ; l'objet sera lié sans informations de débogage
-glfw3.lib(vulkan.obj) : warning LNK4099: PDB 'glfw.pdb' n'a pu être trouvé avec 'glfw3.lib(vulkan.obj)' ou sur 'C:\Users\alexc\Desktop\Documents\Projets Perso\OpenGL\Projet OpenGL\x64\Debug\glfw.pdb' ; l'objet sera lié sans informations de débogage
-glfw3.lib(window.obj) : warning LNK4099: PDB '' n'a pu être trouvé avec 'glfw3.lib(window.obj)' ou sur '' ; l'objet sera lié sans informations de débogage
-glfw3.lib(win32_init.obj) : warning LNK4099: PDB 'glfw.pdb' n'a pu être trouvé avec 'glfw3.lib(win32_init.obj)' ou sur 'C:\Users\alexc\Desktop\Documents\Projets Perso\OpenGL\Projet OpenGL\x64\Debug\glfw.pdb' ; l'objet sera lié sans informations de débogage
-glfw3.lib(win32_joystick.obj) : warning LNK4099: PDB 'glfw.pdb' n'a pu être trouvé avec 'glfw3.lib(win32_joystick.obj)' ou sur 'C:\Users\alexc\Desktop\Documents\Projets Perso\OpenGL\Projet OpenGL\x64\Debug\glfw.pdb' ; l'objet sera lié sans informations de débogage
-glfw3.lib(win32_monitor.obj) : warning LNK4099: PDB '' n'a pu être trouvé avec 'glfw3.lib(win32_monitor.obj)' ou sur '' ; l'objet sera lié sans informations de débogage
-glfw3.lib(win32_time.obj) : warning LNK4099: PDB 'glfw.pdb' n'a pu être trouvé avec 'glfw3.lib(win32_time.obj)' ou sur 'C:\Users\alexc\Desktop\Documents\Projets Perso\OpenGL\Projet OpenGL\x64\Debug\glfw.pdb' ; l'objet sera lié sans informations de débogage
-glfw3.lib(win32_thread.obj) : warning LNK4099: PDB 'glfw.pdb' n'a pu être trouvé avec 'glfw3.lib(win32_thread.obj)' ou sur 'C:\Users\alexc\Desktop\Documents\Projets Perso\OpenGL\Projet OpenGL\x64\Debug\glfw.pdb' ; l'objet sera lié sans informations de débogage
-glfw3.lib(win32_window.obj) : warning LNK4099: PDB '' n'a pu être trouvé avec 'glfw3.lib(win32_window.obj)' ou sur '' ; l'objet sera lié sans informations de débogage
-glfw3.lib(wgl_context.obj) : warning LNK4099: PDB 'glfw.pdb' n'a pu être trouvé avec 'glfw3.lib(wgl_context.obj)' ou sur 'C:\Users\alexc\Desktop\Documents\Projets Perso\OpenGL\Projet OpenGL\x64\Debug\glfw.pdb' ; l'objet sera lié sans informations de débogage
-glfw3.lib(egl_context.obj) : warning LNK4099: PDB 'glfw.pdb' n'a pu être trouvé avec 'glfw3.lib(egl_context.obj)' ou sur 'C:\Users\alexc\Desktop\Documents\Projets Perso\OpenGL\Projet OpenGL\x64\Debug\glfw.pdb' ; l'objet sera lié sans informations de débogage
-glfw3.lib(osmesa_context.obj) : warning LNK4099: PDB '' n'a pu être trouvé avec 'glfw3.lib(osmesa_context.obj)' ou sur '' ; l'objet sera lié sans informations de débogage
   Projet OpenGL.vcxproj -> C:\Users\alexc\Desktop\Documents\Projets Perso\OpenGL\Projet OpenGL\x64\Debug\Projet OpenGL.exe

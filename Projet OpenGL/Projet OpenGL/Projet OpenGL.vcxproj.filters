@@ -52,4 +52,9 @@
       <Filter>Fichiers sources</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="container.jpg">
+      <Filter>Fichiers sources\Exercices Triangle</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
