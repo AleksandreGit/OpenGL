@@ -5,17 +5,35 @@
 #include <iostream>
 #include "Shader.h"
 
-
 // Callback function called to resize the window
 void frameBufferSizeCallback(GLFWwindow* window, const int width, const int height) {
     glViewport(0, 0, width, height);
 }
+
+
+float warpValue(0.0f);
 
 // Function called to process th user's inputs
 void processInput(GLFWwindow* window) {
     // Close the window when escape is pressed
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);
+    }
+    if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
+        if (warpValue < 1.0f) {
+            warpValue += 0.001f;
+        }
+        else {
+            warpValue = 1.0f;
+        }
+    }
+    if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
+        if (warpValue > 0.0f) {
+            warpValue -= 0.001f;
+        }
+        else {
+            warpValue = 0.0f;
+        }
     }
 }
 
@@ -25,10 +43,10 @@ const int W_WIDTH(800), W_HEIGHT(600);
 // Datas of a triangle with a color for each vertice
 float vertices[] = {
     // positions          // colors           // texture coords
-     0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-     0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+     0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   2.0f, 2.0f, // top right
+     0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   2.0f, 0.0f, // bottom right
     -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-    -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
+    -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 2.0f  // top left 
 };
 unsigned int indices[] = {
     0, 1, 3, // first triangle
@@ -106,26 +124,45 @@ int main()
 
     //TEXTURE
     int textWidth, textHeight, nbChannels;
-    unsigned char* data = stbi_load("./container.jpg", &textWidth, &textHeight, &nbChannels, 0);
+    unsigned char* data;
+    stbi_set_flip_vertically_on_load(true);
 
-    unsigned int texture;
-    glGenTextures(1, &texture);
+    unsigned int textures[2];
+    glGenTextures(2, textures);
 
-    glBindTexture(GL_TEXTURE_2D, texture);
-    /*
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    */
-    if (data) {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textWidth, textHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else {
-        std::cout << "Failed to load texture" << std::endl;
+    for (int i = 0; i < 2; i++) {
+        switch (i) {
+            case 0:
+                data = stbi_load("./face.png", &textWidth, &textHeight, &nbChannels, 0);
+                break;
+            case 1:
+                data = stbi_load("./container.jpg", &textWidth, &textHeight, &nbChannels, 0);
+                break;
+            default:
+                data = stbi_load("./container.jpg", &textWidth, &textHeight, &nbChannels, 0);
+                break;
+        }
+        glBindTexture(GL_TEXTURE_2D, textures[i]);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+        if (data) {
+            if(i==0)
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textWidth, textHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+            else
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textWidth, textHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+            glGenerateMipmap(GL_TEXTURE_2D);
+        }
+        else {
+            std::cout << "Failed to load texture" << std::endl;
+        }
     }
     stbi_image_free(data);
+    shader.use();
+    shader.setInt("texture1", 0);
+    shader.setInt("texture2", 1);
 
 
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); ==> this line permits to draw without filling the drawings
@@ -140,11 +177,14 @@ int main()
         processInput(window);
 
         shader.setFloat("offset", X_OFFSET);
+        shader.setFloat("warp", warpValue);
         shader.use();
 
         // bind Texture
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture);
+        glBindTexture(GL_TEXTURE_2D, textures[0]);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, textures[1]);
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
@@ -158,6 +198,7 @@ int main()
     // ------------------------------------------------------------------------
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &EBO);
 
     glfwTerminate(); // clean/delete all of GLFW's ressources allocated
     return 0;
