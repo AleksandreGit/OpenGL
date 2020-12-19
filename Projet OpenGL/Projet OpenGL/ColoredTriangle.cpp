@@ -1,4 +1,4 @@
-#define STB_IMAGE_IMPLEMENTATION
+/*#define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #include <glad/glad.h> // Glad need to be imported first because it imports the basics of OpenGL elements
 #include <GLFW/glfw3.h>
@@ -203,4 +203,4 @@ int main()
     glfwTerminate(); // clean/delete all of GLFW's ressources allocated
     return 0;
 
-}
+}*/
