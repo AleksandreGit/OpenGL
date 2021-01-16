@@ -1,4 +1,4 @@
-#define STB_IMAGE_IMPLEMENTATION
+/*#define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #include <glad/glad.h> // Glad need to be imported first because it imports the basics of OpenGL elements
 #include <GLFW/glfw3.h>
@@ -27,10 +27,10 @@ const int W_WIDTH(800), W_HEIGHT(600);
 // Datas of a triangle with a color for each vertice
 float vertices[] = {
     // positions          // colors           // texture coords
-     0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   2.0f, 2.0f, // top right
-     0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   2.0f, 0.0f, // bottom right
+     0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+     0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
     -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-    -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 2.0f  // top left 
+    -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
 };
 unsigned int indices[] = {
     0, 1, 3, // first triangle
@@ -173,4 +173,4 @@ int main()
     glfwTerminate(); // clean/delete all of GLFW's ressources allocated
     return 0;
 
-}
+}*/

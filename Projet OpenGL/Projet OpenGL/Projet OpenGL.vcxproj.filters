@@ -42,6 +42,9 @@
     <ClCompile Include="Transformation.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="3D_exercice.cpp">
+      <Filter>Fichiers sources\Exercices Triangle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="vertex.glsl" />
